@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import ExcelJS from "exceljs";
+import Resume from './Resume';
+
 
  const  DummyComponent = () => {
     const dummyData =
@@ -828,6 +831,63 @@ useEffect(() => {
   setFilteredData(tempFilteredData);
 }, [filterCurrentlyWorking, filterLevel, filterProfession, filterSkills, searchQuery, dummyData]);
 
+const exportToExcel = async () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Filtered Data");
+
+    // Define styles
+    const headerFont = { bold: true, color: { argb: "FFFFFF" } };
+    const headerFill = { type: "pattern", pattern: "solid", fgColor: { argb: "333333" } };
+    const cellBorder = { top: { style: "thin" }, left: { style: "thin" }, bottom: { style: "thin" }, right: { style: "thin" } };
+
+    worksheet.columns = [
+      { header: "Name", key: "name", width: 20 },
+      { header: "Level", key: "level", width: 15 },
+      { header: "Profession", key: "profession", width: 20 },
+      { header: "Skills", key: "skills", width: 30 },
+      { header: "Currently Working", key: "currentlyWorking", width: 15 }
+    ];
+
+    // Apply header styling
+    worksheet.getRow(1).font = headerFont;
+    worksheet.getRow(1).fill = headerFill;
+    worksheet.getRow(1).border = cellBorder;
+
+    worksheet.columns = [
+      { header: "Name", key: "name" },
+      { header: "Level", key: "level" },
+      { header: "Profession", key: "profession" },
+      { header: "Skills", key: "skills" },
+      { header: "Currently Working", key: "currentlyWorking" }
+    ];
+
+    filteredData.forEach((item) => {
+      worksheet.addRow({
+        name: `${item.first_name} ${item.last_name}`,
+        level: item.level,
+        profession: item.profession,
+        skills: `${item.skills[0].top_technical_skills}, ${item.skills[0].technical_skills}`,
+        currentlyWorking: item.work_experience[0].currently_work_here ? "Yes" : "No"
+      });
+    });
+
+    const excelBuffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([excelBuffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    const fileName = "filtered_data.xlsx";
+    const saveAs = require("file-saver");
+    saveAs(blob, fileName);
+  };
+
+  const [showResume, setShowResume] = useState(false);
+  const [selectedUserData, setSelectedUserData] = useState(null);
+
+  // ... your existing code ...
+
+  const handleCreateResume = (userData) => {
+    setSelectedUserData(userData);
+    setShowResume(true);
+  };
+
 return (
   <div>
     <h2>Filter Options</h2>
@@ -877,6 +937,8 @@ return (
           placeholder="Search by name"
         />
       </div>
+      <button onClick={exportToExcel}>Export to Excel</button>
+
     <h2>Filtered Data</h2>
     <table>
       <thead>
@@ -900,10 +962,15 @@ return (
               {item.skills[0].top_technical_skills}, {item.skills[0].technical_skills}
             </td>
             <td>{item.work_experience[0].currently_work_here ? "Yes" : "No"}</td>
+            <td>
+        <button onClick={() => handleCreateResume(item)}>Create Resume</button>
+      </td>
           </tr>
         ))}
       </tbody>
     </table>
+    {showResume && <Resume data={selectedUserData} />}
+
   </div>
 );
 };

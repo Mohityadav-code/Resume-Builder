@@ -1,0 +1,53 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Resume container */
+  .resume {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  /* Section titles */
+  .section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Subsection titles */
+  .sub-section h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  /* Subheading text */
+  .subheading {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  /* Contact information */
+  .resume p {
+    margin: 5px 0;
+  }
+  
+  /* Skills list */
+  .skills-list p {
+    margin: 3px 0;
+  }
+  
+  /* Project and certificate links */
+  .sub-section p a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .sub-section p a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Add more styles as needed */
+  
