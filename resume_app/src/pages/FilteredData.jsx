@@ -1053,7 +1053,9 @@ const DummyComponent = () => {
   
   return (
     <div className=" w-screen  relative">
-      <div className="w-auto h-auto p-2 m-2 rounded-md shadow-lg paperEffect shadow-slate-250 ">
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-600 md:text-5xl lg:text-6xl text-center ">Admin Dashboard</h1>
+
+      <div className="w-auto h-auto p-2 m-2 rounded-md shadow-lg paperEffect shadow-slate-250 mx-10 my-2 ">
         <div className="flex flex-wrap mb-2 items-center justify-around w-full  h-auto md:h-[220px] lg:h-[110px] labelInputContainer">
           <Dropdown
             lableName="Currently Working"
@@ -1096,9 +1098,9 @@ const DummyComponent = () => {
             placeholder="Select a skill"
           />
 
-          <div onClick={()=> handleClearFilter()} className=" w-16 flex justify-center items-center">
+          <button onClick={()=> handleClearFilter()} className=" w-16 flex justify-center items-center">
             <svg
-              className=" w-8 h-8 hover:tex-red-700 text-red-500"
+              className=" w-10 h-10 hover:tex-red-700 text-red-500"
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -1108,11 +1110,11 @@ const DummyComponent = () => {
             >
               <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
             </svg>
-          </div>
+          </button>
         </div>
       </div>
 
-      <div className=" flex px-10 jusify-between items-center  w-full ">
+      <div className=" flex px-12 jusify-between items-center  w-full ">
         <form className=" w-full ">
           <label
             for="default-search"
@@ -1170,62 +1172,103 @@ const DummyComponent = () => {
           </div>
         </button>
       </div>
-
-      <Table
+            <div className=" px-10 my-4 ">
+           <Table
         columns={columns}
   
         rows={filteredData}
         headerStyle={["text-center ", "text-left pl-3" , "text-left pl-0" , "text-left pl-0" ]}
       />
+        </div>
+   
+{/* {showResume && (
+  <div className="absolute top-0 left-0  w-screen h-auto bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div
+      id="staticModal"
+      data-modal-backdrop="static"
+      tabIndex="-1"
+      className="w-full p-10   bg-gray-200  overflow-x-hidden overflow-y-auto md:inset-0 max-h-full"
+    >
+      <div className="relative w-full max-h-full ">
+        <div className="relative h-full rounded-lg  ">
+          <div className="flex items-start justify-between  bg-gray-300 p-4 border-b rounded-t dark:border-gray-600">
+            <h3 className="text-xl font-semibold text-gray-900 ">
+              Resume
+            </h3>
+            <button
+              onClick={() => {
+                setShowResume(false);
+              }}
+              type="button"
+              className="text-gray-800 bg-transparent  hover:text-gray-900 rounded-lg text-sm 10h-810ml-auto inline-flex justify-center items-center  "
+              data-modal-hide="staticModal"
+            >
+              <svg
+                className="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+              <span className="sr-only">Close modal</span>
+            </button>
+          </div>
+          <Resume data={selectedUserData} />
+        </div>
+      </div>
+    </div>
+  </div>
 
-{showResume && (
-//   <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-50">
-//     <div
-//       id="staticModal"
-//       data-modal-backdrop="static"
-//       tabIndex="-1"
-//       className="w-full p-10   overflow-x-hidden overflow-y-auto md:inset-0 max-h-full"
-//     >
-//       <div className="relative w-fullmax-h-full">
-//         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-//           <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-//             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-//               Resume
-//             </h3>
-//             <button
-//               onClick={() => {
-//                 setShowResume(false);
-//               }}
-//               type="button"
-//               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-//               data-modal-hide="staticModal"
-//             >
-//               <svg
-//                 className="w-3 h-3"
-//                 aria-hidden="true"
-//                 xmlns="http://www.w3.org/2000/svg"
-//                 fill="none"
-//                 viewBox="0 0 14 14"
-//               >
-//                 <path
-//                   stroke="currentColor"
-//                   strokeLinecap="round"
-//                   strokeLinejoin="round"
-//                   strokeWidth="2"
-//                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-//                 />
-//               </svg>
-//               <span className="sr-only">Close modal</span>
-//             </button>
-//           </div>
-        
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-<Resume data={selectedUserData} />
-)}
+)} */}
+     {showResume && (
+        <div
+          className={`  fixed left-0 top-0    bg-[#fff] w-screen  h-full  overflow-y-scroll overflow-scroll overscroll-y-auto py-2  flex justify-center items-center`}
+        >
+          <div className=" h-full w-40  lg:w-full  flex flex-wrap justify-center items-center  ">
+            <div
+              class={`w-full h-full    rounded-[8px]  bg-white  shadow-box `}
+            >
+              <div className="flex relative flex-col p-5 w-full rounded-[8px] h-full   ">
+                <div className="flex justify-end mx-[30px] ">
+                  <button
+                    onClick={()=>setShowResume(false)}
+                    className="flex justify-center items-center bg-[#D9D9D985] rounded-full w-[40px] h-[40px]"
+                  >
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 17 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M16 1L1 16M1 1L16 16"
+                        stroke="#344054"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div className=" w-full h-full ">
+                <Resume data={selectedUserData} />
 
+             
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

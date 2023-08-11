@@ -1,6 +1,5 @@
 import React from "react";
-import "./Resume.css"; // Import your custom CSS file for styling
-
+import "./Resume.css"
 const Resume = ({ data }) => {
   const {
     first_name,
@@ -27,15 +26,15 @@ const Resume = ({ data }) => {
   } = data;
 
   return (
-    <div className=" w-[1100px] mx-auto h-screen bg-white ">
-        <div className="font-[700] text-[40px] text-center pt-10" >
+    <div className=" w-full h-full  border-x border-gray-400 mt-4">
+    <div className="font-[700] text-[40px] border-t-2 border-gray-400 text-center pt-6" >
         <h1>{first_name} {last_name}</h1>
         </div>
         <div className="text-white bg-red-400 py-2 from-pink-500 to-orange-300 text-lg text-center " >
         <p className="subheading">{level} {profession}</p>
             </div>
             <div className=" w-full flex  h-96 ">
-                <div className= "w-2/6 px-4  bg-white h-auto">
+                <div className= "w-2/6 px-4  h-auto">
 
                     <div className= " pl-4 tect-left text-red-400 flex flex-col w-full   mt-2 gap-2 ">
                     <div className="flex  w-full  justify-betweem items-center py-2">  <div  className="w-6"> <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
