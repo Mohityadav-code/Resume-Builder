@@ -1,43 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
-// import Validation from "./Validation";
 
 const Dropdown = ({
   placeholder,
   options,
   lableName,
-  validationError,
   label,
   updateValue,
   widthForSelect,
-  objName,
-  value,
-  isKey,
+  values,
 }) => {
   const [selectedOption, setSelectedOption] = useState(null);
-  let preSelectedvalue = null;
-  if (options) {
-    preSelectedvalue = options.find((item) => item.id === value);
-  }
 
-  useEffect(() => {
-    if (preSelectedvalue) {
-      setSelectedOption(preSelectedvalue[objName]);
-    }
-  }, [preSelectedvalue, objName]);
-
-  const handleOptionClick = (index) => {
-    let obj = options[index];
-    setSelectedOption(obj[objName]);
-    let key = obj.id;
-    if (updateValue) {
-      if (isKey == false) {
-        updateValue(obj[objName]);
-      } else {
-        updateValue(key);
-      }
-      setIsDropdownOpen(false);
-    }
-  };
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef();
 
@@ -88,6 +61,11 @@ const Dropdown = ({
   } else {
     classNameForWidthThird = `absolute z-40  z-40 drop-shadow-xl  w-[300px]  mt-1 overflow-auto text-base bg-white rounded-md  shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text  `;
   }
+  const handleOptionClick = (index) => {
+    updateValue(values[index]);
+    setSelectedOption(options[index]);
+    setIsDropdownOpen(false);
+  };
 
   return (
     <>
@@ -144,7 +122,7 @@ const Dropdown = ({
                       }`}
                       onClick={() => handleOptionClick(index)}
                     >
-                      {option[objName]}
+                      {option}
                     </button>
                   </li>
                 ))}
@@ -152,7 +130,6 @@ const Dropdown = ({
             </div>
           )}
         </div>
-        {/* <Validation Error={validationError} /> */}
       </div>
     </>
   );
