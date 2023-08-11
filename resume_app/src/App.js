@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/admin/dashboard" element={<DummyComponent />} />
-          <Route path="/" element={<ZeroPage />} />
+          <Route path="*" element={<ZeroPage />} />
         </Routes>
       </BrowserRouter>
     </div>
